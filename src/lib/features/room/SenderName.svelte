@@ -4,7 +4,6 @@
 
   import { i18n } from '#lib/i18n.js';
   import { formatPronouns } from '#lib/personas/pronouns.js';
-  import PronounPill from '#lib/ui/primitives/PronounPill.svelte';
 
   import type { SenderDisplayColors } from './members.js';
 
@@ -12,6 +11,7 @@
 
   interface Props {
     displayName: string;
+    accountName?: string;
     colors: SenderDisplayColors;
     pronouns?: { visible: readonly PronounView[]; overflow: readonly PronounView[] };
     nameClass?: ClassValue;
@@ -24,6 +24,7 @@
 
   let {
     displayName,
+    accountName,
     colors,
     pronouns = { visible: [], overflow: [] },
     nameClass = 'sender',
@@ -82,30 +83,30 @@
     style:--name-color-on-dark={colors.nameColorDark ?? undefined}
   >
     {@render name()}
-    {#each pronouns.visible as pronoun, index (index)}
-      <PronounPill
-        lang={pronoun.language ?? undefined}
-        class={['timeline-pronoun', 'sender-identity-pronoun', { tinted: colors.tinted }]}
-        style={colors.tinted
-          ? undefined
-          : colors.nameColor
-            ? `color: ${colors.nameColor};`
-            : undefined}>{pronoun.summary}</PronounPill
+
+    {#if pronouns.visible.length > 0}<span
+        class="sender-identity-pronouns"
+        class:tinted={colors.tinted}
+        style:color={colors.tinted ? undefined : colors.nameColor}
+        style:--name-color-on-light={colors.nameColorLight ?? undefined}
+        style:--name-color-on-dark={colors.nameColorDark ?? undefined}
       >
-    {/each}
-    {#if pronouns.overflow.length > 0}
-      <PronounPill
-        class={['timeline-pronoun', 'sender-identity-pronoun', { tinted: colors.tinted }]}
-        style={colors.tinted
-          ? undefined
-          : colors.nameColor
-            ? `color: ${colors.nameColor};`
-            : undefined}
-        title={formatPronouns(pronouns.overflow)}
-        >{$i18n.t('timeline.morePronouns', {
-          count: pronouns.overflow.length,
-        })}</PronounPill
+        {#each pronouns.visible as pronoun, index (index)}
+          <span lang={pronoun.language ?? undefined} class="sender-identity-pronoun"
+            >{pronoun.summary}</span
+          >
+        {/each}{#if pronouns.overflow.length > 0}
+          <span class="sender-identity-pronoun" title={formatPronouns(pronouns.overflow)}>
+            {$i18n.t('timeline.morePronouns', {
+              count: pronouns.overflow.length,
+            })}
+          </span>
+        {/if}</span
       >
+    {/if}
+    <!-- (When there is a PMP,) the account's name -->
+    {#if accountName}
+      <span class="sender-identity-via">| {accountName}</span>
     {/if}
   </span>
 {/if}
