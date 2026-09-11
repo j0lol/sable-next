@@ -1,6 +1,6 @@
-@import url('@fontsource-variable/nunito');
-@import url('./lib/ui/primitives/selection.css');
-@import url('./lib/ui/primitives/settings-nav.css');
+@import url("@fontsource-variable/nunito");
+@import url("./lib/ui/primitives/selection.css");
+@import url("./lib/ui/primitives/settings-nav.css");
 
 /* Palette lifted verbatim from Sable's src/app/styles/themes.css so the two
    apps read as the same product. These stay plain CSS rather than a generated
@@ -336,6 +336,7 @@ html {
   --avatar-size-300: 2.25rem;
   --avatar-size-400: 2.625rem;
   --avatar-size-500: 3.625rem;
+  --avatar-size-tiny: 1rem;
   --avatar-size-small: var(--avatar-size-300);
   --avatar-size-medium: var(--avatar-size-400);
   --avatar-size-large: var(--avatar-size-500);
@@ -372,7 +373,13 @@ html {
   --code-line-height: 1.25rem;
 
   /* Font families */
-  --font-family-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', menlo, consolas, monospace;
+  --font-family-mono:
+    ui-monospace,
+    "Cascadia Code",
+    "Source Code Pro",
+    menlo,
+    consolas,
+    monospace;
 
   /* Typography scale */
   --font-size-small: 0.875rem;
@@ -404,16 +411,19 @@ html {
   --safe-area-inset-left: env(safe-area-inset-left, 0px);
   --safe-top: var(--safe-area-inset-top);
   --safe-right: var(--safe-area-inset-right);
-  --safe-bottom: max(var(--safe-area-inset-bottom), var(--keyboard-height, 0px));
+  --safe-bottom: max(
+    var(--safe-area-inset-bottom),
+    var(--keyboard-height, 0px)
+  );
   --safe-left: var(--safe-area-inset-left);
 }
 
-:root[data-tauri-os='android'] {
+:root[data-tauri-os="android"] {
   --safe-bottom: var(--safe-area-inset-bottom);
 }
 
-:root[data-client-decorations='desktop'],
-:root[data-client-decorations='mac'] {
+:root[data-client-decorations="desktop"],
+:root[data-client-decorations="mac"] {
   --titlebar-height: 2rem;
   --safe-top: calc(var(--safe-area-inset-top) + var(--titlebar-height));
 }
@@ -461,29 +471,29 @@ body {
   background-clip: padding-box;
 }
 
-:root[data-underline-links='off'] {
+:root[data-underline-links="off"] {
   --link-decoration: none;
 }
 
-:root[data-reduced-motion='on'] {
+:root[data-reduced-motion="on"] {
   --motion-fast: 0s;
   --motion-normal: 0s;
   --motion-slow: 0s;
 }
 
-:root[data-font-scale='small'] {
+:root[data-font-scale="small"] {
   --font-scale: 0.9375;
 }
 
-:root[data-font-scale='large'] {
+:root[data-font-scale="large"] {
   --font-scale: 1.125;
 }
 
-:root[data-font-scale='largest'] {
+:root[data-font-scale="largest"] {
   --font-scale: 1.25;
 }
 
-:root[data-high-contrast='on'] {
+:root[data-high-contrast="on"] {
   --border-width: var(--border-width-500);
   --focus-ring-width: var(--border-width-700);
   --link-decoration: underline;
@@ -502,7 +512,7 @@ body {
 body {
   background: var(--bg-container);
   color: var(--bg-on-container);
-  font-family: 'Nunito Variable', sans-serif;
+  font-family: "Nunito Variable", sans-serif;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-body);
@@ -520,7 +530,7 @@ textarea {
 }
 
 :disabled,
-[aria-disabled='true'] {
+[aria-disabled="true"] {
   cursor: not-allowed;
 }
 
@@ -558,13 +568,13 @@ button,
 a,
 input,
 label,
-[role='button'],
-[role='switch'] {
+[role="button"],
+[role="switch"] {
   -webkit-tap-highlight-color: transparent;
 }
 
 label[for],
-[role='switch'] {
+[role="switch"] {
   user-select: none;
 }
 
@@ -576,7 +586,7 @@ label[for],
 .selection-layer::after {
   background: var(--surface-container-active);
   border-radius: inherit;
-  content: '';
+  content: "";
   inset: 0;
   opacity: 0;
   pointer-events: none;
@@ -618,13 +628,13 @@ a:not([class]):hover {
       scale var(--motion-fast) ease-in-out;
   }
 
-  .btn:hover:not(:disabled, [aria-disabled='true'], [data-no-button-motion]),
+  .btn:hover:not(:disabled, [aria-disabled="true"], [data-no-button-motion]),
   .menu-item:hover:not(:disabled, [data-disabled], [data-no-button-motion]),
   .option-card:hover:not([data-disabled], [data-no-button-motion]) {
     translate: 0 -1px;
   }
 
-  .btn:active:not(:disabled, [aria-disabled='true'], [data-no-button-motion]),
+  .btn:active:not(:disabled, [aria-disabled="true"], [data-no-button-motion]),
   .menu-item:active:not(:disabled, [data-disabled], [data-no-button-motion]),
   .option-card:active:not([data-disabled], [data-no-button-motion]) {
     scale: 0.96;

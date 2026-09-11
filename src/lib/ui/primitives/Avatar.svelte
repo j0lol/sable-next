@@ -7,7 +7,7 @@
 
   import { toInitials } from './initials.js';
 
-  type AvatarSize = 'small' | 'medium' | 'large';
+  type AvatarSize = 'tiny' | 'small' | 'medium' | 'large';
   type Props = {
     src?: string | null;
     alt?: string;
@@ -86,6 +86,13 @@
     user-select: none;
     vertical-align: middle;
     width: var(--avatar-size);
+  }
+
+  :global(.avatar-tiny) {
+    --avatar-size: 1rem;
+
+    font-size: var(--font-size-small);
+    border-radius: var(--radii-200);
   }
 
   :global(.avatar-small) {

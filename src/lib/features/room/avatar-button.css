@@ -5,6 +5,6 @@
   cursor: pointer;
   display: block;
   flex: 0 0 auto;
-  height: var(--avatar-size-small);
+  height: 1.2rem;
   padding: 0;
 }

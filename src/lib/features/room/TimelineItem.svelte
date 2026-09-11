@@ -650,6 +650,49 @@
         <time datetime={new Date(item.timestamp).toISOString()}
           >{formatMessageTimestamp(item.timestamp)}</time
         >
+        <div style="display: flex; flex-flow: row nowrap; gap: 0.5rem; align-items: baseline;">
+        {#if persona && item.sender && !collapsed}
+          <PersonaProfile
+            profile={persona}
+            accountId={item.sender}
+            {accountName}
+            label={$i18n.t('timeline.personaProfile', { name: senderName })}
+            onOpenAccount={openAccountFromPersona}
+            onAvatarClick={onPersonaAvatarClick}
+            onOpenChange={onPersonaOpenChange}
+          >
+            <Avatar
+              class="message-avatar"
+              src={senderAvatar}
+              size="tiny"
+              color={senderAvatar ? undefined : avatarColor}
+              name={senderName}
+            />
+          </PersonaProfile>
+        {:else if item.sender && onSenderProfile && !collapsed}
+          <button
+            class="avatar-button"
+            type="button"
+            aria-label={$i18n.t('timeline.senderProfile', { name: senderName })}
+            onclick={openSenderProfile}
+          >
+            <Avatar
+              class="message-avatar"
+              src={senderAvatar}
+              size="tiny"
+              color={senderAvatar ? undefined : avatarColor}
+              name={senderName}
+            />
+          </button>
+        {:else if  !collapsed}
+          <Avatar
+            class="message-avatar"
+            src={senderAvatar}
+            size="tiny"
+            color={senderAvatar ? undefined : avatarColor}
+            name={senderName}
+          />
+        {/if}
         {#if onMentionUser && item.sender && !collapsed}
           <SenderName
             displayName={senderName}
@@ -668,6 +711,7 @@
             compact={layout === 'compact'}
           />
         {/if}
+        </div>
       </div>
     {:else if !collapsed}
       {#if persona && item.sender}
